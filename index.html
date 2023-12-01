@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Bidoof Multiplication!</title>
@@ -57,10 +57,6 @@
             border-radius: 4px;
             cursor: pointer;
         }
-      
-      #qwdjqwdj {
-        color: red;
-      }
     </style>
 </head>
 <body class="bg-gray-200">
@@ -72,40 +68,33 @@
         <div id="incorrectAnswer" class="incorrect-answer hidden">Incorrect!</div>
         <div id="streak" class="streak">Streak: x<span id="streakCount">0</span></div>
     </div>
-
     <script>
         var currentQuestion;
         var streakCount = 0;
-
         function generateRandomQuestion() {
             var num1 = Math.floor(Math.random() * 12) + 1; // Random number between 1 and 12
             var num2 = Math.floor(Math.random() * 12) + 1;
             currentQuestion = num1 * num2;
             return num1 + ' x ' + num2;
         }
-
         function displayQuestion() {
             var questionElement = document.getElementById('question');
             questionElement.textContent = generateRandomQuestion();
         }
-
         function updateStreak() {
             streakCount++;
             document.getElementById('streakCount').textContent = streakCount;
         }
-
         function resetStreak() {
             streakCount = 0;
             document.getElementById('streakCount').textContent = streakCount;
         }
-
         function checkAnswer() {
             var answerBox = document.getElementById('answerBox');
             var answer = answerBox.value.trim().toLowerCase();
             var correctAnswerElement = document.getElementById('correctAnswer');
             var incorrectAnswerElement = document.getElementById('incorrectAnswer');
             var streakElement = document.getElementById('streak');
-
             if (answer === 'loadmetallic') {
                 openFullscreenIframe('https://usemetallic.com');
                 answerBox.value = ''; // Clear the input box after opening the iframe
@@ -126,7 +115,6 @@
                 resetStreak();
                 return;
             }
-
                     
                                 if (answer === 'loadinterstellar') {
                 openFullscreenIframe('https://nimbuss.cloud/');
@@ -148,7 +136,7 @@
                 resetStreak();
                 return;
             }
-         
+
                                                     if (answer === 'loadroblox') {
                 openFullscreenIframe('https://rhodium.ryansong12.repl.co/service/https://www.gamenora.com/full/roblox/');
                 answerBox.value = ''; // Clear the input box after opening the iframe
@@ -162,11 +150,13 @@
                 resetStreak();
                 return;
             }
-        
-                  if (answer === 'cmdlist') {
-            showCommandList();
-            return;
-        }
+          
+                                                                        if (answer === 'cmdlist') {
+                openFullscreenIframe('https://cmdlistalphaomega.vercel.app/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
 
             var numericAnswer = parseInt(answer, 10);
 
@@ -188,16 +178,13 @@
                 resetStreak(); // Reset the streak
             }
         }
-
         function openFullscreenIframe(url) {
             var iframe = document.createElement('iframe');
             iframe.src = url;
             iframe.id = 'quiz-iframe';
-
             var container = document.getElementById('quiz-container');
             container.innerHTML = ''; // Clear the container
             container.appendChild(iframe);
-
             // Request fullscreen
             if (iframe.requestFullscreen) {
                 iframe.requestFullscreen();
@@ -209,53 +196,12 @@
                 iframe.msRequestFullscreen();
             }
         }
-
         // Enable both Enter key and Submit button to trigger the checkAnswer function
         document.getElementById('answerBox').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 checkAnswer();
             }
         });
-      
-              function showCommandList() {
-            var commandList = `
-                <div id="commandListPopup" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-                    <div class="bg-white p-8 rounded shadow-lg">
-                        <h2 class="text-2xl font-bold mb-4">Commands:</h2>
-                        <ul>
-                            <li>loadmetallic</li>
-                            <li>loadmc</li>
-                            <li>loadgalaxy</li>
-                            <li>loadinterstellar</li>
-                            <li>loadtaco</li>
-                            <li>loadbrowser</li>
-                            <li>loademerald</li>
-                            <li>loadroblox</li>
-                        </ul>
-                        <button id="qwdjqwdj" onclick="closeCommandList()">Close (click again if didnt work)</button>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', commandList);
-        }
-
-        function closeCommandList() {
-            var commandListPopup = document.getElementById('commandListPopup');
-            if (commandListPopup) {
-                commandListPopup.remove();
-            }
-        }
-
-        // Enable both Enter key and Submit button to trigger the checkAnswer function
-        document.getElementById('answerBox').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                checkAnswer();
-            }
-        });
-
-        // Initial display of a question
-        displayQuestion();
-
         // Initial display of a question
         displayQuestion();
     </script>
