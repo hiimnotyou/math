@@ -156,6 +156,13 @@
                 return;
             }
 
+		                                                    if (answer === 'loaddiscord') {
+                openFullscreenIframe('https://rhodium.ryansong12.repl.co/service/https://discord.com');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
                                                               if (answer === 'loademerald') {
                 openFullscreenIframe('https://proj30.shekinahphotography.com/');
                 answerBox.value = ''; // Clear the input box after opening the iframe
