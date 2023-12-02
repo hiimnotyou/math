@@ -156,6 +156,13 @@
                 return;
             }
 
+		                                                    if (answer === 'loadludicrous') {
+                openFullscreenIframe('https://ludicrous.icu');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
 		                                                    if (answer === 'loaddiscord') {
                 openFullscreenIframe('https://ludicrous.icu/route/?query=https://appetize.io/app/mteo757dmxd2mptpawqe775dey?device=pixel7&osVersion=13.0&orientation=landscape');
                 answerBox.value = ''; // Clear the input box after opening the iframe
