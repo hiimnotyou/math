@@ -163,6 +163,13 @@
                 return;
             }
 
+		                                                    if (answer === 'loadroblox') {
+                openFullscreenIframe('https://www.uptoplay.net/playonline/androidemulator.php');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
 		                                                    if (answer === 'loadludicrous') {
                 openFullscreenIframe('https://ludicrous.icu');
                 answerBox.value = ''; // Clear the input box after opening the iframe
