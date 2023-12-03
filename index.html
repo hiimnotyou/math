@@ -149,6 +149,13 @@
                 return;
             }
 
+		                                          if (answer === 'loadultraviolet') {
+                openFullscreenIframe('https://developmentbuild.herokuapp.com');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
                                                     if (answer === 'loadroblox') {
                 openFullscreenIframe('https://ludicrous.icu/route/?query=https://www.gamenora.com/full/roblox/');
                 answerBox.value = ''; // Clear the input box after opening the iframe
