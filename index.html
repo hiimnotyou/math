@@ -120,6 +120,13 @@
                 resetStreak();
                 return;
             }
+
+		                      if (answer === 'loadskribbl') {
+                openFullscreenIframe('https://skribbl.io/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
           
                                 if (answer === 'loadgalaxy') {
                 openFullscreenIframe('https://geoquiz.gq/');
