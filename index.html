@@ -127,9 +127,15 @@
                 resetStreak();
                 return;
             }
-          
                                 if (answer === 'loadgalaxy') {
                 openFullscreenIframe('https://geoquiz.gq/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
+		                                if (answer === 'loadtt') {
+                openFullscreenIframe('https://www.rossipotti.de/ausgabe28/tetris/index.html');
                 answerBox.value = ''; // Clear the input box after opening the iframe
                 resetStreak();
                 return;
