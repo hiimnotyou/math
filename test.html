@@ -84,8 +84,13 @@
 		var currentQuestion;
 		var streakCount = 0;
 
-		// Set the 'access' cookie to false by default
-		document.cookie = "access=false";
+		// Check if the 'access' cookie is set to true
+		var access = getCookie("access");
+
+		// If not, set the 'access' cookie to false by default
+		if (!access) {
+			document.cookie = "access=false";
+		}
 
 		function generateRandomQuestion() {
 			var num1 = Math.floor(Math.random() * 12) + 1; // Random number between 1 and 12
@@ -124,6 +129,7 @@
 					// Set the 'access' cookie to true if the special answer is provided
 					document.cookie = "access=true";
 					alert("Access granted!");
+					return;
 				} else {
 					alert("Access denied!");
 					return;
