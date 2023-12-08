@@ -195,6 +195,13 @@
                 resetStreak();
                 return;
             }
+
+		                                                              if (answer === 'loadbidoof') {
+                openFullscreenIframe('https://94tcyy-8080.csb.app/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
           
                                                                         if (answer === 'cmdlist') {
                 openFullscreenIframe('https://cmdlistalphaomega.vercel.app/');
