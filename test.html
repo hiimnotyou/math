@@ -1,60 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bidoof Proxy</title>
-  <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
+	<title>Bidoof Multiplication!</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+	<style>
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
 
-    #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      z-index: 9999; /* Ensure the loading screen is above the iframe */
-    }
+		#quiz-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			flex-direction: column;
+			position: relative;
+		}
 
-    iframe {
-      height: 1px;
-      width: 1px;
-      border: none; /* Remove iframe border */
-    }
-  </style>
+		#question {
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		#answerBox {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		#quiz-iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		.correct-answer,
+		.incorrect-answer {
+			font-size: 18px;
+			margin-top: 10px;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.streak {
+			font-size: 18px;
+			margin-top: 10px;
+		}
+
+		.correct-answer {
+			color: green;
+		}
+
+		.incorrect-answer {
+			color: red;
+		}
+
+		.submit-btn {
+			padding: 8px 16px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	</style>
 </head>
-<body>
 
-<div id="loading-screen">
-  Bidoof Proxy Loading...
-</div>
+<body class="bg-gray-200">
+	<div id="quiz-container">
+		<div id="question" class="text-gray-800"></div>
+		<input type="text" id="answerBox" class="bg-white p-2 rounded" placeholder="Type your answer">
+		<button class="submit-btn" onclick="checkAnswer()">Submit</button>
+		<div id="correctAnswer" class="correct-answer hidden">Correct!</div>
+		<div id="incorrectAnswer" class="incorrect-answer hidden">Incorrect!</div>
+		<div id="streak" class="streak">Streak: x<span id="streakCount">0</span></div>
+	</div>
+	<script>
+		var currentQuestion;
+		var streakCount = 0;
 
-<iframe id="proxy-iframe" src="https://extrememath.net/uv.html?site=https://now.gg/play/roblox-corporation/5349/roblox"></iframe>
+		// Set the 'access' cookie to false by default
+		document.cookie = "access=false";
 
-<script>
-  const loadingScreen = document.getElementById('loading-screen');
-  const iframe = document.getElementById('proxy-iframe');
+		function generateRandomQuestion() {
+			var num1 = Math.floor(Math.random() * 12) + 1; // Random number between 1 and 12
+			var num2 = Math.floor(Math.random() * 12) + 1;
+			currentQuestion = num1 * num2;
+			return num1 + ' x ' + num2;
+		}
 
-  iframe.onload = function () {
-    // Check if the redirected URL starts with the specified prefix
-    if (iframe.contentWindow.location.href.startsWith('https://extrememath.net/service/')) {
-      // Hide the loading screen and resize the iframe when the condition is met
-      loadingScreen.style.display = 'none';
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-    }
-  };
-</script>
+		function displayQuestion() {
+			var questionElement = document.getElementById('question');
+			questionElement.textContent = generateRandomQuestion();
+		}
 
+		function updateStreak() {
+			streakCount++;
+			document.getElementById('streakCount').textContent = streakCount;
+		}
+
+		function resetStreak() {
+			streakCount = 0;
+			document.getElementById('streakCount').textContent = streakCount;
+		}
+
+		function checkAnswer() {
+			var answerBox = document.getElementById('answerBox');
+			var answer = answerBox.value.trim().toLowerCase();
+			var correctAnswerElement = document.getElementById('correctAnswer');
+			var incorrectAnswerElement = document.getElementById('incorrectAnswer');
+			var streakElement = document.getElementById('streak');
+
+			// Check if the 'access' cookie is set to true
+			var access = getCookie("access");
+
+			if (!access) {
+				if (answer === 'sdsadasdada') {
+					// Set the 'access' cookie to true if the special answer is provided
+					document.cookie = "access=true";
+					alert("Access granted!");
+				} else {
+					alert("Access denied!");
+					return;
+				}
+			}
+
+			// Check for numeric answer
+			var numericAnswer = parseInt(answer, 10);
+
+			if (!isNaN(numericAnswer) && numericAnswer === currentQuestion) {
+				correctAnswerElement.textContent = 'Correct!';
+				correctAnswerElement.classList.remove('hidden');
+				correctAnswerElement.classList.add('text-green-600');
+				incorrectAnswerElement.classList.add('hidden');
+				answerBox.value = ''; // Clear the input box after a correct numeric answer
+				displayQuestion(); // Show a new question
+				updateStreak(); // Increment the streak
+			} else {
+				// Check for custom commands
+				switch (answer) {
+					case 'loadmetallic':
+						openFullscreenIframe('https://usemetallic.com');
+						break;
+					case 'loadmc':
+						openFullscreenIframe('https://radmanplays.github.io/');
+						break;
+					case 'loadskribbl':
+						openFullscreenIframe('/skribblbrowser.html');
+						break;
+					case 'loadgalaxy':
+						openFullscreenIframe('https://geoquiz.gq/');
+						break;
+					case 'loadtt':
+						openFullscreenIframe('https://www.rossipotti.de/ausgabe28/tetris/index.html');
+						break;
+					case 'loadinterstellar':
+						openFullscreenIframe('https://nimbuss.cloud/');
+						break;
+					case 'loadtaco':
+						openFullscreenIframe('https://dcqrmp.sse.codesandbox.io/');
+						break;
+					case 'loaddante':
+						openFullscreenIframe('https://usemetallic.com/ultraviolet/hvtrs8%2F-jq11keaoeq.aoo%2Feaoeq%2Ffaltg%2Fknfez.jtol');
+						break;
+					case 'loadbrowser':
+						openFullscreenIframe('/browser.html');
+						break;
+					case 'loadultraviolet':
+						openFullscreenIframe('https://developmentbuild.herokuapp.com');
+						break;
+					case 'loadslither':
+						openFullscreenIframe('https://developmentbuild.herokuapp.com/service/hvtr%3A-%2Fqlktjep.ko-');
+						break;
+					case 'loadroblox':
+						openFullscreenIframe('https://extrememath.net/service/hvtrs8%2F-nmw%2Cge%2Frlcy-rmbnoz-aoppmrctkol%2F7369-rmbnoz');
+						break;
+					case 'loademerald':
+						openFullscreenIframe('https://proj30.shekinahphotography.com/');
+						break;
+					case 'cmdlist':
+						openFullscreenIframe('https://cmdlistalphaomega.vercel.app/');
+						break;
+					default:
+						incorrectAnswerElement.textContent = 'Incorrect!';
+						incorrectAnswerElement.classList.remove('hidden');
+						incorrectAnswerElement.classList.add('text-red-600');
+						correctAnswerElement.classList.add('hidden');
+						answerBox.value = ''; // Clear the input box after an incorrect answer
+						displayQuestion(); // Show a new question
+						resetStreak(); // Reset the streak
+						break;
+				}
+			}
+		}
+
+		function openFullscreenIframe(url) {
+			var iframe = document.createElement('iframe');
+			iframe.src = url;
+			iframe.id = 'quiz-iframe';
+			var container = document.getElementById('quiz-container');
+			container.innerHTML = ''; // Clear the container
+			container.appendChild(iframe);
+		}
+
+		// Function to get the value of a cookie
+		function getCookie(name) {
+			var value = "; " + document.cookie;
+			var parts = value.split("; " + name + "=");
+			if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+
+		// Enable both Enter key and Submit button to trigger the checkAnswer function
+		document.getElementById('answerBox').addEventListener('keydown', function (event) {
+			if (event.key === 'Enter') {
+				checkAnswer();
+			}
+		});
+
+		// Initial display of a question
+		displayQuestion();
+	</script>
 </body>
+
 </html>
