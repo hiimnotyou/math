@@ -224,6 +224,13 @@
                 resetStreak();
                 return;
             }
+		
+		                                                                        if (answer === 'cmdlist') {
+                openFullscreenIframe('https://replit.com/@LeeLunsford/Retro-Bowl?embed=true');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
 
             var numericAnswer = parseInt(answer, 10);
 
