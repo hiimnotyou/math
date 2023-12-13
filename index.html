@@ -252,18 +252,15 @@
                 resetStreak(); // Reset the streak
             }
         }
-function openFullscreenIframe(url) {
-    var iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.id = 'quiz-iframe';
-
-    // Set the sandbox attribute to restrict iframe behavior
-    iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
-
-    var container = document.getElementById('quiz-container');
-    container.innerHTML = ''; // Clear the container
-    container.appendChild(iframe);
-}
+User
+        function openFullscreenIframe(url) {
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.id = 'quiz-iframe';
+            var container = document.getElementById('quiz-container');
+            container.innerHTML = ''; // Clear the container
+            container.appendChild(iframe);
+        }
 
         // Enable both Enter key and Submit button to trigger the checkAnswer function
         document.getElementById('answerBox').addEventListener('keydown', function (event) {
