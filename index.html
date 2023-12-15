@@ -136,6 +136,13 @@
                 return;
             }
 
+		                      if (answer === 'loadrh') {
+                openFullscreenIframe('https://browser.rammerhead.org/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
 		                      if (answer === 'loadskribbl') {
                 openFullscreenIframe('/skribblbrowser.html');
                 answerBox.value = ''; // Clear the input box after opening the iframe
