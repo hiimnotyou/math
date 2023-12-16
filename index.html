@@ -122,6 +122,14 @@
                 return;
             }
 
+		
+		            if (answer === 'loadocelot') {
+                openFullscreenIframe('https://proxy.ocelot.lol/');
+                answerBox.value = ''; // Clear the input box after opening the iframe
+                resetStreak();
+                return;
+            }
+
 				            if (answer === 'loadmetallic2') {
                 openFullscreenIframe('https://metallic.eu.org');
                 answerBox.value = ''; // Clear the input box after opening the iframe
