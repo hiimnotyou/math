@@ -1,5 +1,3 @@
-redesign this but kep it on one line and dont format it also add a background image with this.url = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FZqlY0viPsZg%2Fmaxresdefault.jpg%3Fsqp%3D-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgVyg5MA8%3D%26rs%3DAOn4CLBw-jLVIlwxvwHaqjDWYDYpE_zdTA&f=1&nofb=1&ipt=7b7ffb0dc6092a87e87f45070ff545435e204ea35decd729c0ff21d6782511c6&ipo=images"
-heres the current code
 function isPageDev() {
     return localStorage.getItem("dev") ? "dev" : ""
 }
