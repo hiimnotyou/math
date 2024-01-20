@@ -139,6 +139,13 @@
 				return;
 			}
 
+						if (answer==='loadingot') {
+				openFullscreenIframe('ingot.html');
+				answerBox.value=''; // Clear the input box after opening the iframe
+				resetStreak();
+				return;
+			}
+
 			if (answer==='loadbrowseremulator') {
 				openFullscreenIframe('/browser.html');
 				answerBox.value=''; // Clear the input box after opening the iframe
