@@ -23,10 +23,17 @@
 	  </div>
   </div>
   <script>
-    var iFrameDetection = (window === window.parent) ? false : true;
+    // Define a list of allowed sites
+    var allowedSites = ["https://Learningsosilly.vercel.app", "https://Learningsosilly2.vercel.app"];
+    
+    // Get the parent window URL
+    var parentUrl = window.parent !== window ? document.referrer : null;
 
-    // If the page is loaded within an iframe, redirect to example.com
-    if (iFrameDetection) {
+    // Check if the parent URL is in the allowed sites list
+    var isAllowed = parentUrl && allowedSites.includes(parentUrl);
+
+    // If the page is loaded within an iframe and the parent URL is not in the allowed sites list, redirect to example.com
+    if (window !== window.parent && !isAllowed) {
       window.location.href = 'https://example.com';
     }
   </script>
