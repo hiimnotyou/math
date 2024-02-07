@@ -22,19 +22,14 @@
 		  <span id="streakCount">0</span>
 	  </div>
   </div>
-		<script>
-// List of allowed domains
-var allowedDomains = ["https://math.bidoof.app"];
-
-// Get the iframe element
-var iframe = document.getElementById("myIframe");
-
-// Check if the domain of the parent matches any of the allowed domains
-if (allowedDomains.includes(document.referrer)) {
-    iframe.src = document.referrer;
-} else {
-    // Redirect to the specified URL if the domain is not allowed
-    window.location.href = "https://iframe-blockeduwu.vercel.app";
+<script>
+// Check if the page is being iframed
+if (window.self !== window.top) {
+    // Check if the main URL of the page is not "math.bidoof.app"
+    if (window.location.hostname !== "math.bidoof.app") {
+        // Redirect to the specified URL if the domain is not allowed
+        window.location.href = "https://iframe-blockeduwu.vercel.app";
+    }
 }
 </script>
 <script>var currentQuestion;
