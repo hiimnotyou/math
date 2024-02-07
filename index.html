@@ -22,6 +22,21 @@
 		  <span id="streakCount">0</span>
 	  </div>
   </div>
+		<script>
+// List of allowed domains
+var allowedDomains = ["https://example.com", "https://anotherexample.com"];
+
+// Get the iframe element
+var iframe = document.getElementById("myIframe");
+
+// Check if the domain of the parent matches any of the allowed domains
+if (allowedDomains.includes(document.referrer)) {
+    iframe.src = document.referrer;
+} else {
+    // Redirect to the specified URL if the domain is not allowed
+    window.location.href = "https://iframe-blockeduwu.vercel.app";
+}
+</script>
 <script>var currentQuestion;
 		var streakCount=0;
 
